@@ -1,0 +1,83 @@
+public class ArrayPractice {
+    public static void main(String[] args) {
+        String[] teams = new String[29];
+        teams[0] = "Atlanta Hawks";
+        teams[1] = "Boston Celtics";
+        teams[2] = "Brooklyn Nets";
+        teams[3] = "Charlotte Hornets";
+        teams[4] = "Chicago Bulls";
+        teams[5] = "Cleveland Cavaliers";
+        teams[6] = "Dallas Mavericks";
+        teams[7] =  "Denver Nuggets";
+        teams[8] = "Detroit Pistons";
+        teams[9] = "Golden State Warriors";
+        teams[10] = "Houston Rockets";
+        teams[11] = "Indiana Pacers";
+        teams[12] = "LA Clippers";
+        teams[13] = "Los Angeles Lakers";
+        teams[14] = "Memphis Grizzlies";
+        teams[15] = "Miami Heat";
+        teams[16] = "Milwaukee Bucks";
+        teams[17] = "Minnesota Timberwolves";
+        teams[18] = "New Orleans Pelicans";
+        teams[19] = "New York Knicks";
+        teams[20] = "Oklahoma City Thunder";
+        teams[21] = "Orlando Magic";
+        teams[22] = "Philadelphia 76ers";
+        teams[23] = "Phoenix Suns";
+        teams[24] = "Portland Trail Blazers";
+        teams[25] = "Sacramento Kings";
+        teams[26] = "San Antonio Spurs";
+        teams[27] = "Toronto Raptors";
+        teams[28] = "Utah Jazz";
+        int size = teams.length;
+        System.out.println("The length of this array is" + " " + size);
+        System.out.println("teams" + "\n");
+        System.out.println(teams[19]);
+        String upperCase = teams[19].toUpperCase();
+        System.out.println("Knicks in upper case is" + " " + upperCase + "\n");
+//      Knicks players Array
+        String [] knicks_players = new String[18];
+        knicks_players[0] = "Ron Baker";
+        knicks_players[1] = "Michael Beasley";
+        knicks_players[2] = "Ron Baker";
+        knicks_players[3] = "Damyean Dotson";
+        knicks_players[4] = "Tim Hardaway Jr.";
+        knicks_players[5] = "Willy Hernangomez";
+        knicks_players[6] = "Isaiah Hicks";
+        knicks_players[7] = "Jarrett Jack";
+        knicks_players[8] = "Enes Kanter";
+        knicks_players[9] = "Luke Kornet";
+        knicks_players[10] = "Courtney Lee";
+        knicks_players[11] = "Doug McDermott";
+        knicks_players[12] = "Joakim Noah";
+        knicks_players[13] = "Frank Ntilikina";
+        knicks_players[14] = "Kyle O'Quinn";
+        knicks_players[15] = "Kristaps Porzingis";
+        knicks_players[16] = "Ramon Sessions";
+        knicks_players[17] = "Lance Thomas";
+//      Nets players Array
+        String [] nets_players = new String [18];
+        nets_players[0] = "Quincy Acy";
+        nets_players[1] = "Jarrett Allen";
+        nets_players[2] = "Trevor Booker";
+        nets_players[3] = "Trevor Booker";
+        nets_players[4] = "DeMarre Carroll";
+        nets_players[5] = "Allen Crabbe";
+        nets_players[6]  = "Spencer Dinwiddie";
+        nets_players[7] = "Joe Harris";
+        nets_players[8] = "Rondae Hollis-Jefferson";
+        nets_players[9] = "Sean Kilpatrick";
+        nets_players[10] = "Caris LeVert";
+        nets_players[11] = "Jeremy Lin";
+        nets_players[12] = "Timofey Mozgov";
+        nets_players[13] = "Yakuba Ouattara";
+        nets_players[14] = "D'Angelo Russell";
+        nets_players[15] = "Isaiah Whitehead";
+        nets_players[16] = "Jacob Wiley";
+        nets_players[17] = "Tyler Zeller";
+//      Array comparison
+        boolean areTheseArraysEqual = knicks_players.equals( nets_players);
+        System.out.println("Are Knicks and Nets Arrays equal?" + " " + areTheseArraysEqual);
+    }
+}
