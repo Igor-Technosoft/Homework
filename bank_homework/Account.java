@@ -5,9 +5,7 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 
 
-/**
- * Created by Mujab on 12/16/17.
- */
+
 public class Account {
 
     double balance;
