@@ -1,0 +1,79 @@
+package classesAndObjectsTutorial;
+
+/**
+ * Created by Mujab on 12/16/17.
+ */
+public class Customer {
+    private String firstName;
+    private String lastName;
+    private Account acc;
+    int defaultBalance = 100;
+//   public static double transferSameBankAmount;
+//   private double transferDifferentBankAmount;
+    public  double depositAmount;
+    public double withdrawAmount;
+    public double transferAmount;
+
+    TransactionActivities trc;
+
+    public Customer(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public Customer() {
+        firstName = "John";
+        lastName = "Doe";
+    }
+
+    public void addAccount(double initialBalance) {
+        acc = new Account();
+        trc = new TransactionActivities();
+        acc.accountId = "ACCT ID = " + Account.getNextId();
+        acc.balance = defaultBalance + initialBalance;
+        acc.displayAccountDetails();
+
+    }
+    public void deposit(double depositAmount) {
+//        this.depositAmount = depositAmount;
+        acc.balance = acc.balance + depositAmount;
+        System.out.println("You deposited " + depositAmount +  " dollars" + "\n");
+//        acc.displayAccountDeposit();
+        trc.displayAccountTransactionDeposit();
+        acc.displayAccountDeposit();
+    }
+
+    public void withdraw(double withdrawAmount) {
+//        this.withdrawAmount = withdrawAmount;
+        acc.balance = acc.balance - withdrawAmount;
+        System.out.println("You withdrew " + withdrawAmount + " dollars" + "\n");
+        trc.dislayAccoutTransactionWithdraw();
+        acc.dislayAccountWithdraw();
+    }
+
+    public void transferSameBank(double transferAmount) {
+//        transferSameBankAmount = transferAmount;
+//        this.transferAmount = transferAmount;
+        acc.balance = acc.balance - transferAmount;
+        System.out.println("You transferred " + transferAmount + " dollars " + " to an internal Citibank account" + "\n");
+        trc.displaySameBankTrnsactionTransferAccountDetails();
+        acc.displaySameBankTransferAccountDetails();
+
+    }
+    public void transferDifferentBank(double transferAmount) {
+//        transferDifferentBankAmount = transferAmount;
+//        this.transferAmount = transferAmount;
+        acc.balance = acc.balance - transferAmount;
+        System.out.println("You transferred " + transferAmount + " dollars " + " to an external North Fork account" + "\n");
+        trc.displayDifferentBankTransationTransferAccountDetails();
+        acc.displayDifferentBankTransferAccountDetails();
+
+    }
+//    public void transferSameBank() {
+//        transferSameBank(45.55);
+//    }
+
+//    public void addAccount() {
+//        addAccount(100);
+//    }
+}
