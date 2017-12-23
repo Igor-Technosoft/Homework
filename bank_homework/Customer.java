@@ -8,8 +8,7 @@ public class Customer {
     private String lastName;
     private Account acc;
     int defaultBalance = 100;
-//   public static double transferSameBankAmount;
-//   private double transferDifferentBankAmount;
+
     public  double depositAmount;
     public double withdrawAmount;
     public double transferAmount;
@@ -34,17 +33,17 @@ public class Customer {
         acc.displayAccountDetails();
 
     }
+ 
     public void deposit(double depositAmount) {
-//        this.depositAmount = depositAmount;
+
         acc.balance = acc.balance + depositAmount;
         System.out.println("You deposited " + depositAmount +  " dollars" + "\n");
-//        acc.displayAccountDeposit();
+
         trc.displayAccountTransactionDeposit();
         acc.displayAccountDeposit();
     }
 
     public void withdraw(double withdrawAmount) {
-//        this.withdrawAmount = withdrawAmount;
         acc.balance = acc.balance - withdrawAmount;
         System.out.println("You withdrew " + withdrawAmount + " dollars" + "\n");
         trc.dislayAccoutTransactionWithdraw();
@@ -52,8 +51,6 @@ public class Customer {
     }
 
     public void transferSameBank(double transferAmount) {
-//        transferSameBankAmount = transferAmount;
-//        this.transferAmount = transferAmount;
         acc.balance = acc.balance - transferAmount;
         System.out.println("You transferred " + transferAmount + " dollars " + " to an internal Citibank account" + "\n");
         trc.displaySameBankTrnsactionTransferAccountDetails();
@@ -61,19 +58,11 @@ public class Customer {
 
     }
     public void transferDifferentBank(double transferAmount) {
-//        transferDifferentBankAmount = transferAmount;
-//        this.transferAmount = transferAmount;
         acc.balance = acc.balance - transferAmount;
         System.out.println("You transferred " + transferAmount + " dollars " + " to an external North Fork account" + "\n");
         trc.displayDifferentBankTransationTransferAccountDetails();
         acc.displayDifferentBankTransferAccountDetails();
 
     }
-//    public void transferSameBank() {
-//        transferSameBank(45.55);
-//    }
 
-//    public void addAccount() {
-//        addAccount(100);
-//    }
 }
