@@ -30,21 +30,18 @@ public class TransactionActivities {
     public void displayAccountTransactionDeposit() {
         System.out.println("Transaction History " + "\n");
         System.out.println(strDate + " " + merchantCitibank + " " + transactionDeposit + "\n");
-//        System.out.println("Your new balance is " +  new DecimalFormat("#.##").format(acc.balance) + "\n");
     }
 
     public void dislayAccoutTransactionWithdraw() {
         System.out.println(yesterdayDate + " " + merchantBNY + " " + transactionWithdraw + "\n");
-//        System.out.println("Your new balance is " + new DecimalFormat("#.##").format(balance) + "\n");
+
     }
     public void displaySameBankTrnsactionTransferAccountDetails() {
         System.out.println(dayBeforeYesteday + " " + merchantCitibank + " " + transacionSameBankTransfer + "\n");
-//        System.out.println("The new balance after transfer " +  new DecimalFormat("#.##").format(balance) + " " + "dollars" + "\n");
     }
 
     public void displayDifferentBankTransationTransferAccountDetails() {
         System.out.println(twoDaysBeforeYesterday + " " + merchantNorthFork + " " + transacionDifferentBankTransfer);
-//        System.out.println("Routing Number " + " "  + "The new balance after transfer " + new DecimalFormat("#.##").format(balance) + " " + "dollars" + "\n");
     }
 
 }
