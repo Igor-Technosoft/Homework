@@ -1,8 +1,5 @@
 package classesAndObjectsTutorial;
 
-/**
- * Created by Mujab on 12/16/17.
- */
 public class Customer {
     private String firstName;
     private String lastName;
