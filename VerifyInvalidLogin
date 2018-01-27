@@ -35,6 +35,21 @@ public class VerifyInvalidLogin extends DriverWrapper {
         signUpPage.clickCreateButton();
 
     }
+    @Test
+// This test is to verify that users can't sign-up without selecting gender
+    public void createNewAccountWithoutGenderButton() {
+        LandingPage landingPage  = new LandingPage();
+        landingPage.clickSignUpLink();
+        SignUpPage signUpPage = new SignUpPage();
+        signUpPage.enterFirstName("Pete");
+        signUpPage.enterLastName("Jones");
+        signUpPage.enterPhoneNumber("7187347736");
+        signUpPage.enterNewPassword("testing12345!");
+        signUpPage.clickCreateButton();
+        String expectedWarningMessage = "Please choose a gender. You can change who can see this later.";
+        String actualWarningMessage = "Please choose a gender. You can change who can see this later.";
+        Assert.assertEquals(expectedWarningMessage,actualWarningMessage);
+    }
 
    @Test
     // This test is to test whether the "Male" Radio Button is displayed on the page, then if it's enabled, and
