@@ -33,6 +33,25 @@ public class BasePage {
 
         return DriverWrapper.getDriver().findElement(locator).getText();
     }
+    
+    public void selectMonthFromDropDown(By locator) {
+        
+        Select monthDropDown = new Select(DriverWrapper.getDriver().findElement(By.id("month")));
+       
+        monthDropDown.selectByVisibleText("Oct");
+    }
+    public void selectDayFromDropDown (By locator) {
+        Select dayDropDown = new Select(DriverWrapper.getDriver().findElement(By.id("day")));
+    }
+
+
+    public void selectYearDropDown (By locator) {
+        Select yearDropDown = new Select(DriverWrapper.getDriver().findElement(By.id("year")));
+    }
+
+    
+    
+    
 // New Locator Methods
     public boolean genderRadioButtonDisplayed(By locator) {
 
