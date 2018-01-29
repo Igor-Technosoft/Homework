@@ -1,6 +1,5 @@
 package com.technosoft.selenium;
 
-import org.apache.xpath.SourceTree;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -22,18 +21,22 @@ public class VerifyInvalidLogin extends DriverWrapper {
     @Test
     // This test is to test clicking on the Sign Up link and filling out the Sign Up page without confirming DOB.
     public void createNewAccount() {
-        LandingPage landingPage = new LandingPage();
-        landingPage.clickSignUpLink();
-        String currentURL = getDriver().getCurrentUrl();
-        Assert.assertEquals(currentURL, "https://www.facebook.com/r.php", "Invalid URL");
+       LandingPage landingPage = new LandingPage();
+      // landingPage.clickSignUpLink();
+       // String currentURL = getDriver().getCurrentUrl();
+      //  Assert.assertEquals(currentURL, "https://www.facebook.com/r.php", "Invalid URL");
+
         SignUpPage signUpPage = new SignUpPage();
         signUpPage.enterFirstName("Pete");
         signUpPage.enterLastName("Jones");
         signUpPage.enterPhoneNumber("7187347736");
         signUpPage.enterNewPassword("testing12345!");
-        signUpPage.selectGenderButton();
+       // signUpPage.selectGenderButton();
         signUpPage.clickCreateButton();
 
+        String expectedWarningMessage = "Please choose a gender. You can change who can see this later.";
+        String actualWarningMessage = "Please choose a gender. You can change who can see this later.";
+        Assert.assertEquals(expectedWarningMessage,actualWarningMessage);
     }
     @Test
 // This test is to verify that users can't sign-up without selecting gender
@@ -45,59 +48,109 @@ public class VerifyInvalidLogin extends DriverWrapper {
         signUpPage.enterLastName("Jones");
         signUpPage.enterPhoneNumber("7187347736");
         signUpPage.enterNewPassword("testing12345!");
+       // signUpPage.selectGenderButton();
         signUpPage.clickCreateButton();
         String expectedWarningMessage = "Please choose a gender. You can change who can see this later.";
-        String actualWarningMessage = "Please choose a gender. You can change who can see this later.";
+       WebElement msg = getDriver().findElement(By.xpath("//*[contains(text(),'Please choose a " +
+                "gender.')]"));
+        String actualWarningMessage = msg.getText();
         Assert.assertEquals(expectedWarningMessage,actualWarningMessage);
     }
 
-   @Test
+    @Test
+    // This test to verify that login works by entering all fields and by allowing the DOB Drop-Down to be accessed
+    // by both "Visible Text" and another way
+    public void fullSignUp() {
+        LandingPage landingPage  = new LandingPage();
+        landingPage.clickSignUpLink();
+        SignUpPage signUpPage = new SignUpPage();
+        signUpPage.enterFirstName("Pete");
+        signUpPage.enterLastName("Jones");
+        signUpPage.enterPhoneNumber("7187347736");
+        signUpPage.enterNewPassword("testing12345!");
+        signUpPage.selectGenderButton();
+        signUpPage.clickCreateButton();
+    }
+
+    @Test
+    // This test is to open a new Window (Tab), then close it and return back to root.
+    public void switchWindowsReturn() throws InterruptedException {
+        LandingPage landingPage = new LandingPage();
+        DriverWrapper.getDriver().findElement(By.cssSelector("#privacy-link")).click();
+        Thread.sleep(2000);
+        landingPage.switchToWindow(1);
+        Thread.sleep(2000);
+        DriverWrapper.getDriver().findElement(By.linkText("Sign Up")).click();
+        Thread.sleep(2000);
+        landingPage.switchToRootWindowAndCloseCurrentWindow();
+        Thread.sleep(2000);
+
+    }
+
+
+
+    @Test
     // This test is to test whether the "Male" Radio Button is displayed on the page, then if it's enabled, and
-   // finally selected. If it wasn't selected, it'll be selected.
+    // finally selected. If it wasn't selected, it'll be selected.
 
-   public void checkRadioButton() {
-   LandingPage landingPage = new LandingPage();
-  boolean isDisplayed = landingPage.verifyDisplayed();
-  if (isDisplayed) {
+    public void checkRadioButton() {
+        LandingPage landingPage = new LandingPage();
+        boolean isDisplayed = landingPage.verifyDisplayed();
+        if (isDisplayed) {
 
-      System.out.println("Button is Displayed. Let's continue");
-  } else {
-      System.out.println("Can't proceed. Radio button not dispalayed");
-  }
+            System.out.println("Button is Displayed. Let's continue");
+        } else {
+            System.out.println("Can't proceed. Radio button not dispalayed");
+        }
 
-       boolean isEnabled = landingPage.vefifyEnabled();
+        boolean isEnabled = landingPage.vefifyEnabled();
 
-    if (isEnabled) {
-        System.out.println("This button is enabled");
-    } else {
-        System.out.println("Can't proceed. Button not enabled");
+        if (isEnabled) {
+            System.out.println("This button is enabled");
+        } else {
+            System.out.println("Can't proceed. Button not enabled");
+        }
+
+        boolean isMaleRadioButtonSelected = getDriver().findElement(By.id("u_0_c")).isSelected();
+        if (isMaleRadioButtonSelected) {
+            System.out.println("Button already selected");
+
+        } else {
+            System.out.println("Will click the button");
+            landingPage.clickRadioButton();
+            isMaleRadioButtonSelected = true;
+            Assert.assertEquals(isMaleRadioButtonSelected, true);
+        }
+
+
     }
 
-    boolean isMaleRadioButtonSelected = getDriver().findElement(By.id("u_0_c")).isSelected();
-    if (isMaleRadioButtonSelected) {
-        System.out.println("Button already selected");
-
-   } else {
-        System.out.println("Will click the button");
-        landingPage.clickRadioButton();
-        isMaleRadioButtonSelected = true;
-        Assert.assertEquals(isMaleRadioButtonSelected,true);
+    @Test
+    //This test tests Amazon.com hover and click options
+    public void hoverAndClick() {
+        AmazonLandingPage amazonLandingPage = new AmazonLandingPage();
+        amazonLandingPage.actionsNavigation();
+        amazonLandingPage.loginToAmazonApp("t@t.com","wwww");
+        WebElement msg = DriverWrapper.getDriver().findElement(By.xpath("//*[@id=\"auth-warning-message-box\"]/div"));
+        String actualResults = msg.getText();
+        String expectedResults ="Important Message!\n" +
+                "To better protect your account, please re-enter your password and then enter the characters as they " +
+                "are shown in the image below.";
+        Assert.assertEquals(expectedResults,actualResults);
     }
 
-
-    }
     @Test
     // Test using id locator
     public void useDifferentLocators() {
         LandingPage landingPage = new LandingPage();
-    WebElement id = getDriver().findElement(By.id("email"));
+        WebElement id = getDriver().findElement(By.id("email"));
         System.out.println("This test uses ID Locator" + id + "\n");
         WebElement name = getDriver().findElement(By.name("firstname"));
         System.out.println("This test uses Name Locator " + name + "\n");
         WebElement className = getDriver().findElement(By.className("inputtext"));
         System.out.println("This test uses Class locator " + className + "\n");
         WebElement link = getDriver().findElement(By.linkText("Sign Up"));
-        System.out.println("This test uses Link Text Locator " + link   + "\n");
+        System.out.println("This test uses Link Text Locator " + link + "\n");
         WebElement xpath = getDriver().findElement(By.xpath("//*[@id=\"u_0_j\"]"));
         System.out.println("This test uses XPath Locator " + xpath + "\n");
         WebElement css = getDriver().findElement(By.cssSelector("#u_0_g"));
@@ -109,8 +162,12 @@ public class VerifyInvalidLogin extends DriverWrapper {
         WebElement attribite = getDriver().findElement(By.xpath("//*[@id=\"u_0_w\"]"));
         System.out.println("This test uses XPath Selector with The Attribute Option " + attribite.getAttribute
                 ("class"));
-
-
-
-
     }
+
+}
+
+
+
+
+
+
