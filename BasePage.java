@@ -105,7 +105,22 @@ public void actionsNavigation() {
         }
         DriverWrapper.getDriver().switchTo().window(listofWindows.get(0));
     }
+public void getTimes(By locator) {
+        List<WebElement> list = DriverWrapper.getDriver().findElements(locator);
+            for (WebElement element:list) {
+                System.out.println(element.getText() + "\n");
 
+
+            }
+        Calendar cal = Calendar.getInstance();
+        int hour = cal.get(Calendar.HOUR);
+        
+            for (int i=hour; i<=12;i+=2) {
+                cal.add(Calendar.HOUR, 2);
+                System.out.println(i);
+                }
+
+            }
 
 // New Locator Methods
     public boolean genderRadioButtonDisplayed(By locator) {
