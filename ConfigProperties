@@ -1,0 +1,4 @@
+url=https://www.amazon.com/
+chrome_driver_path=/Users/igorsandler/Downloads/chromedriver
+firefox_driver_path=/Users/igorsandler/Downloads/geckodriver
+safari_driver_path=/Users/igorsandler/Downloads/SafariDriver.safariextz
