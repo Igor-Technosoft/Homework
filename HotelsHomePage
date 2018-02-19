@@ -1,0 +1,62 @@
+package framework;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import stepdefinition.SharedSD;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * Created by igorsandler on 2/16/18.
+ */
+public class HotelsHomePage extends BasePage {
+    //public String checkDate;
+    // public By checkDate = By.xpath("//*[@id=\"qf-0q-localised-check-in\"]");
+    private By checkinField = By.xpath("//*[@id=\"qf-0q-localised-check-in\"]");
+    SimpleDateFormat sdf = new SimpleDateFormat("d");
+    Date date = new Date();
+    String todayDate = sdf.format(date);
+
+    public void setCurrentDate(By locator) {
+        try {
+
+
+            SharedSD.getDriver().findElement(locator).click();
+            List<WebElement> days = SharedSD.getDriver().findElements(By.xpath("" +
+                    ".//*[@class='widget-datepicker-bd']/descendant::a"));
+            for (WebElement day : days) {
+                String expectedDay = day.getText();
+                if (expectedDay.equals(todayDate)) {
+                    day.click();
+                    Thread.sleep(3000);
+                    break;
+                }
+            }
+
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void setDate() {
+
+        setCurrentDate(checkinField);
+
+    }
+
+    public void verifyDate()  {
+
+
+        WebElement msg = SharedSD.getDriver().findElement(By.xpath("//*[@id=\"qf-0q-localised-check-in\"]"));
+        String expectedDay = msg.getText();
+        if (expectedDay.equals(todayDate)) {
+            Assert.assertEquals(expectedDay, todayDate);
+
+        }
+    }
+}
