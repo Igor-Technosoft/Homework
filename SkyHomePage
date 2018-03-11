@@ -1,0 +1,73 @@
+package framework;
+
+
+import org.apache.commons.lang.StringUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotSelectableException;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import stepdefinition.SharedSD;
+
+import java.util.*;
+import java.text.SimpleDateFormat;
+import java.lang.Object.*;
+
+
+/**
+ * Created by igorsandler on 3/10/18.
+ */
+public class SkyHomePage extends BasePage {
+    List<String> skyDays = new ArrayList<>();
+    List<String> weekDays = new ArrayList<>();
+    By todayBar = By.xpath("//*[@id=\"week\"]/a[1]/span[2]/span[2]");
+    public void daysOfWeek() {
+        try {
+
+            List<WebElement> list = SharedSD.getDriver().findElements(By.className("name"));
+            for (WebElement element : list) {
+                skyDays.add(element.getText());
+                String days = element.getText();
+                System.out.println(days);
+
+            }
+        } catch (ElementNotSelectableException e) {
+            e.printStackTrace();
+        }
+            SimpleDateFormat format = new SimpleDateFormat("EEE");
+            Calendar date = Calendar.getInstance();
+            weekDays.add("Today");
+
+            for (int i = 0; i < 7; i++) {
+                date.add(Calendar.DAY_OF_YEAR, 1);
+                Date tomorrow = date.getTime();
+                String tomorrowDate = format.format(tomorrow);
+                weekDays.add(tomorrowDate);
+                System.out.println(tomorrowDate);
+                continue;
+            }
+
+    }
+    public void compareDays() {
+        Assert.assertEquals(skyDays,weekDays);
+    }
+
+    public void clickBar() {
+        SharedSD.getDriver().findElement(todayBar).click();
+
+    }
+    public void dayTemps() {
+        String minTemp = SharedSD.getDriver().findElement(By.className("minTemp")).getText();
+        System.out.println(minTemp);
+        String maxTemp = SharedSD.getDriver().findElement(By.className("maxTemp")).getText();
+        System.out.println(maxTemp);
+        String minUpTemp = SharedSD.getDriver().findElement(By.xpath("//*[@id=\"title\"]/span[1]/span[2]/span[2]/" +
+                "span[2]")).getText();
+        System.out.println(StringUtils.stripStart(minUpTemp,"Low: "));
+        String maxUpTemp = SharedSD.getDriver().findElement(By.xpath("//*[@id=\"title\"]/span[1]/span[2]/span[2]/" +
+                "span[3]")).getText();
+        System.out.println(StringUtils.stripStart(maxUpTemp,"High: "));
+
+        Assert.assertEquals(minTemp,StringUtils.stripStart(minUpTemp,"Low: "));
+        Assert.assertEquals(maxTemp,StringUtils.stripStart(maxUpTemp,"High: "));
+    }
+}
