@@ -26,8 +26,7 @@ public class HotelsHomePage extends BasePage {
             "form/div[5]/button");
 
     public void setCurrentDate(By locator) {
-      //  try {
-
+ 
 
             SharedSD.getDriver().findElement(locator).click();
             List<WebElement> days = SharedSD.getDriver().findElements(By.xpath("" +
@@ -36,7 +35,7 @@ public class HotelsHomePage extends BasePage {
                 String expectedDay = day.getText();
                 if (expectedDay.equals(todayDate)) {
                     day.click();
-                   // Thread.sleep(3000);
+                   
                     break;
                 }
             }
