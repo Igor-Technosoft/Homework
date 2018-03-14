@@ -54,16 +54,7 @@ public class HotelsHomePage extends BasePage {
 
     }
 
-    public void verifyDate() {
-
-
-        WebElement msg = SharedSD.getDriver().findElement(By.cssSelector("#qf-0q-localised-check-in"));
-        String expectedDay = msg.getText();
-        if (expectedDay.equals(todayDate)) {
-            Assert.assertEquals(expectedDay, todayDate);
-
-        }
-    }
+    
 
     public void clickWhereBox() {
         try {
@@ -116,9 +107,9 @@ public class HotelsHomePage extends BasePage {
         }
     }
    public void handleAlert() throws InterruptedException {
-     // SharedSD.getDriver().switchTo().alert().dismiss();
+     
        SharedSD.getDriver().findElement(By.xpath("//*[@id=\"managed-overlay\"]/button")).click();
-      // Thread.sleep(2000);
+      
    }
 }
 
