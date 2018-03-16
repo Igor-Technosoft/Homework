@@ -30,7 +30,7 @@ public class HotelsHomePageSD {
 //    }
     @When("^I enter Paris in Where To box$")
     public void enterPlace() throws InterruptedException {
-        hotelsHomePage.handleAlert();
+    
         hotelsHomePage.enterText();
     }
 
