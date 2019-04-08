@@ -26,8 +26,7 @@ public class HotelsHomePage extends BasePage {
             "form/div[5]/button");
 
     public void setCurrentDate(By locator) {
-      //  try {
-
+ 
 
             SharedSD.getDriver().findElement(locator).click();
             List<WebElement> days = SharedSD.getDriver().findElements(By.xpath("" +
@@ -36,7 +35,7 @@ public class HotelsHomePage extends BasePage {
                 String expectedDay = day.getText();
                 if (expectedDay.equals(todayDate)) {
                     day.click();
-                   // Thread.sleep(3000);
+                   
                     break;
                 }
             }
@@ -54,16 +53,7 @@ public class HotelsHomePage extends BasePage {
 
     }
 
-    public void verifyDate() {
-
-
-        WebElement msg = SharedSD.getDriver().findElement(By.cssSelector("#qf-0q-localised-check-in"));
-        String expectedDay = msg.getText();
-        if (expectedDay.equals(todayDate)) {
-            Assert.assertEquals(expectedDay, todayDate);
-
-        }
-    }
+    
 
     public void clickWhereBox() {
         try {
@@ -116,9 +106,9 @@ public class HotelsHomePage extends BasePage {
         }
     }
    public void handleAlert() throws InterruptedException {
-     // SharedSD.getDriver().switchTo().alert().dismiss();
+     
        SharedSD.getDriver().findElement(By.xpath("//*[@id=\"managed-overlay\"]/button")).click();
-      // Thread.sleep(2000);
+      
    }
 }
 
